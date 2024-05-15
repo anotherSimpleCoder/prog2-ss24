@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>ex2</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <mainClass>com.example.Main</mainClass>
+    </properties>
+
+	<build>
+	  <plugins>
+        <plugin>
+          <!-- define required minimum version of Maven, see https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html -->
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>3.4.1</version>
+          <executions>
+            <execution>
+              <id>enforce-maven</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireMavenVersion>
+                    <!-- Note: That version is provided by actions/setup-java@v3 at the time of writing.
+                         See: No way to configure maven version in actions/setup-java #457
+                              at https://github.com/actions/setup-java/issues/457 -->
+                    <version>3.8.8</version>
+                  </requireMavenVersion>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <!-- define main class to execute, see http://www.mojohaus.org/exec-maven-plugin/usage.html -->
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.1.0</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>java</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <mainClass>${mainClass}</mainClass>
+          </configuration>
+        </plugin>
+        
+        <plugin>
+          <!-- define Main-Class entry in the MANIFEST.MF of the executable JAR, see https://maven.apache.org/plugins-archives/maven-shade-plugin-2.1/examples/executable-jar.html -->
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.5.1</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <transformers>
+                  <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <mainClass>${mainClass}</mainClass>
+                  </transformer>
+                </transformers>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+	  </plugins>
+	</build>
+</project>

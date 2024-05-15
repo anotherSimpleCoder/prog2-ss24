@@ -1,0 +1,26 @@
+.app {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    font-family: sans-serif;
+
+    .controls {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        button {
+            $color: rgb(33, 90, 159);
+            background-color: $color;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+
+            border: $color;
+
+
+            padding: .5rem;
+        }
+    }
+}
