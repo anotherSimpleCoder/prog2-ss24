@@ -28,7 +28,7 @@ public class Matrix <T extends Number> {
     }
 
 
-    public Matrix<? extends Number> add(Matrix<T> b) throws IllegalArgumentException {
+    public Matrix<? extends Number> add(Matrix<? extends Number> b) throws IllegalArgumentException {
         if(this.rows != b.getRows() || this.columns != b.getColumns()) {
             throw new IllegalArgumentException();
         }
@@ -46,7 +46,7 @@ public class Matrix <T extends Number> {
 
     public Matrix<? extends Number> scale(T scale) {
         Matrix<Double> res = new Matrix<>(this.rows, this.columns);
-
+        
         for(int i = 0; i < this.rows; i++) {
             for(int j = 0; j < this.columns; j++) {
                 double product = this.get(i,j).doubleValue() * scale.doubleValue();
