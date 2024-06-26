@@ -119,4 +119,19 @@ public class Inventory {
 		
 		return isEqual;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Inventory {");
+
+		for(Product product: this.inventoryMap.values()) {
+			builder.append(product.toString());
+		}
+		
+		builder.append("}");
+		
+		// TODO Auto-generated method stub
+		return builder.toString();
+	}
 }

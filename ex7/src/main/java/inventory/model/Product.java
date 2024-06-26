@@ -49,4 +49,9 @@ public class Product {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("Product{id: %d, name: %s, category: %s, price: %.2f, quantity: %d}", this.productId, this.name, this.category, this.price, this.quantity);
+	}
 }
