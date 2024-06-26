@@ -18,10 +18,9 @@ public class Prompt {
 		while(invalidInput) {
 			System.out.print(message);
 			input = this.scanner.next();
-			System.out.println();
-			
-			if(!input.isEmpty()) {
-				System.err.println("Please enter a valid value!");
+
+			if(input.isEmpty()) {
+				System.err.print("Please enter a valid value!");
 			} else {
 				invalidInput = false;
 			}
@@ -38,11 +37,10 @@ public class Prompt {
 			try {
 				System.out.print(message);
 				input = this.scanner.nextDouble();
-				System.out.println();
 				
 				invalidInput = false;
 			} catch(InputMismatchException e) {
-				System.err.println("Please enter a valid value!");
+				System.err.print("Please enter a valid value!");
 				invalidInput = true;
 			}
 		}
@@ -58,11 +56,10 @@ public class Prompt {
 			try {
 				System.out.print(message);
 				input = this.scanner.nextInt();
-				System.out.println();
 				
 				invalidInput = false;
 			} catch(InputMismatchException e) {
-				System.err.println("Please enter a valid value!");
+				System.err.print("Please enter a valid value!");
 				invalidInput = true;
 			}
 		}
@@ -78,7 +75,7 @@ public class Prompt {
 			System.out.println();
 			
 			for(int optionsIndex = 0; optionsIndex < options.size(); optionsIndex++) {
-				System.out.printf("%d) %s", optionsIndex, options.get(optionsIndex));
+				System.out.printf("%d) %s \n", optionsIndex, options.get(optionsIndex));
 			}
 			
 			System.out.println();

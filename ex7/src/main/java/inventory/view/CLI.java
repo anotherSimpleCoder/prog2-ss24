@@ -1,8 +1,8 @@
 package inventory.view;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 import inventory.model.Inventory;
 import inventory.model.Product;
@@ -33,15 +33,17 @@ public class CLI {
 	public void start() {
 		int choice;
 		
-		System.out.println();
-		System.out.println("===========================");
-		System.out.println("INVENTORY MANAGEMENT SYSTEM");
-		System.out.println("===========================");
-		System.out.println();
-				
-		choice = prompt.promptChoice("Please enter your choice: ", this.options);
-		
-		this.routeByChoice(choice);
+		while(true) {
+			System.out.println();
+			System.out.println("===========================");
+			System.out.println("INVENTORY MANAGEMENT SYSTEM");
+			System.out.println("===========================");
+			System.out.println();
+					
+			choice = prompt.promptChoice("Please enter your choice: ", this.options);
+			
+			this.routeByChoice(choice);
+		}
 	}
 	
 
@@ -162,21 +164,36 @@ public class CLI {
 		System.out.println("======================");
 		System.out.println();
 		
-		String criterion = prompt.promptString("Please enter the filter criterion (id, name, category, price, quantity): ");
-		ArrayList<String> critertionOptions = new ArrayList<String>() {{}};
-		//TODO: Think of a way to implement custom filters
-		/*
-		 * Probably: 
-		 * Only filter for numeric criterions and let the user decide between those.
-		 * After that choice let them chose the comparing operator followed by the
-		 * operand (a constant) with which should be compared.
-		 * */
-		switch(criterion) {
-			case "id": {
-				
+		ArrayList<String> critertionOptions = new ArrayList<String>() {{
+			add("name");
+			add("price");
+			add("quantity");
+		}};
+
+		List<Product> filteredProducts = new LinkedList<>();
+		
+		int criterionChoice = prompt.promptChoice("Please enter the filter criterion:", critertionOptions);
+		switch(criterionChoice) {
+			case 0: {
+				String nameToFilter = prompt.promptString("Enter the name to filter by: ");
+				filteredProducts = this.inventory.filterProducts(product -> product.getName().equals(nameToFilter));
+				break;
+			}
+			
+			case 1: {
+				double priceToFilter = prompt.promptDouble("Enter the price to filter by: ");
+				filteredProducts = this.inventory.filterProducts(product -> product.getPrice() == priceToFilter);
+				break;
+			}
+			
+			case 2: {
+				int quantityToFilter = prompt.promptInt("Enter the quantity to filter by: ");
+				filteredProducts = this.inventory.filterProducts(product -> product.getQuantity() == quantityToFilter);
+				break;
 			}
 		}
 		
+		System.out.println(filteredProducts);
 	}
 	
 	public void raiseProductPriceByPercentage() {
@@ -204,47 +221,47 @@ public class CLI {
 	
 	private void routeByChoice(int choice) {
 		switch(choice) {
-			case 1:
+			case 0:
 				this.addProduct();
 				break;
 				
-			case 2:
+			case 1:
 				this.removeProduct();
 				break;
 				
-			case 3:
+			case 2:
 				this.searchProductsById();
 				break;
 				
-			case 4:
+			case 3:
 				this.showProductsByCategory();
 				break;
 				
-			case 5:
+			case 4:
 				this.showAllProducts();
 				break;
 				
-			case 6:
+			case 5:
 				this.sortProductsByName();
 				break;
 				
-			case 7:
+			case 6:
 				this.sortProductsByPrice();
 				break;
 				
-			case 8:
+			case 7:
 				this.showLowestQuantityProducts();
 				break;
 				
-			case 9:
+			case 8:
 				this.showProductsByCustomFilter();
 				break;
 				
-			case 10:
+			case 9:
 				this.raiseProductPriceByPercentage();
 				break;
 				
-			case 11:
+			case 10:
 				System.exit(0);
 		
 			default:
