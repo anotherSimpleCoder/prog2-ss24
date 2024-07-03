@@ -19,6 +19,8 @@ public class User {
 	}
 	
 	public void returnBook(Book bookToReturn) {
+		bookToReturn.setBorrowed(false);
+		bookToReturn.setReturnDate(null);
 		borrowedBooks.remove(bookToReturn);
 	}
 	

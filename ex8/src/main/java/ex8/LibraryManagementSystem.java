@@ -100,13 +100,28 @@ public class LibraryManagementSystem {
 		return topBooks.stream().limit(3).collect(Collectors.toList());
 	}
 	
-	public Set<String> authorsWithTheMostBooks() {
-		Set<String> authors = this.books.stream()
+	public TreeMap<Integer, String> authorsWithTheMostBooks() {
+		List<String> authorsList = this.books.stream()
 			.map(book -> book.getAuthor())
-			.collect(Collectors.toSet());
+			.sorted()
+			.collect(Collectors.toList());
+	
+		TreeMap<Integer, String> authorsWithTheMostBooks = new TreeMap<>();
+		int appearances = 0;
+		String previousAuthor = authorsList.getFirst();
+		for(String author: authorsList) {
+			if(!author.equals(previousAuthor)) {
+				authorsWithTheMostBooks.put(appearances, author);
+				appearances = 0;
+				previousAuthor = author;
+				appearances++;
+			} else {
+				appearances++;
+			}
+		}
 		
 		
-		return authors;
+		return authorsWithTheMostBooks;
 	}
 	
 	public List<Book> sortByRating() {
