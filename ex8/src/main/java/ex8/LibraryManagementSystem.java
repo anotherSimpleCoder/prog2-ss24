@@ -3,6 +3,7 @@ package ex8;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -10,9 +11,9 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class LibraryManagementSystem {
-	private TreeSet<Book> books;
-	private HashMap<String, User> users;
-	private TreeSet<Book> borrowedBooks;
+	private Set<Book> books;
+	private Map<String, User> users;
+	private Set<Book> borrowedBooks;
 	
 	public LibraryManagementSystem() {
 		this.books = new TreeSet<>();
@@ -45,7 +46,7 @@ public class LibraryManagementSystem {
 
 	}
 	
-	public TreeSet<Book> getAllBooks() {
+	public Set<Book> getAllBooks() {
 		return this.books;
 	}
 	

@@ -5,7 +5,7 @@ void generate_bill() {
 	float price = 0.0;
 
 	printf("Bitte geben Sie den Nettopreis ein: ");
-	fflush(stdout);
+	
 
 	scanf("%7s", input);
 	sscanf(input, "%f", &price);

@@ -9,6 +9,9 @@ public class User {
 	private TreeSet<Book> borrowedBooks;
 	
 	public User(String name, String readerId) {
+		this.setName(name);
+		this.setReaderId(readerId);
+		
 		this.borrowedBooks = new TreeSet<>(Book.bookReturnDateComparator);
 	}
 	
@@ -26,5 +29,23 @@ public class User {
 	
 	public TreeSet<Book> getBorrowedBooks() {
 		return borrowedBooks;
+	}
+	
+	public void setName(String name) {
+		if(!name.strip().isEmpty() && name != null)
+			this.name = name;
+	}
+
+	public String getReaderId() {
+		return readerId;
+	}
+
+	public void setReaderId(String readerId) {
+		if(!readerId.strip().isEmpty() && readerId != null)
+			this.readerId = readerId;
+	}
+
+	public String getName() {
+		return name;
 	}
 }
