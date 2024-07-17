@@ -11,7 +11,7 @@ void generate_bill() {
 	sscanf(input, "%f", &price);
 
 	printf("Nettopreis\t\t Euro %.2f\n", price);
-	printf("+ 20% MwSt\t\t Euro %.2f\n", price * 0.2);
+	printf("+ 20%% MwSt\t\t Euro %.2f\n", price * 0.2);
 	printf("=====================================\n");
 	printf("Bruttopreis\t\t Euro %.2f\n", price * 1.2);
 }

@@ -10,24 +10,17 @@ double calculate_pi(int terms) {
     return 4*pi;
 }
 
-long long factorial(int n) {
-    long long res = 1;
-
-    for(int i = 1; i <= n; i++) {
-        res *= i;
-    }
-
-    return round(res);
-}
 
 double calculate_e(int terms) {
     double e = 0;
+    double factorial = 1.0;
 
-    for(int k = 0; k <= terms; k++) {
-        e += 1.0/(double)(factorial(k));
+    for(int k = 1; k <= terms; k++) {
+        factorial *= k;
+        e += 1.0 / factorial;
     }
 
-    return e;
+    return e + 1;
 }
 
 void calculate_constants() {
@@ -35,6 +28,6 @@ void calculate_constants() {
     printf("Please enter the amount of iterations: ");
     scanf("%d", &iterations);
 
-    printf("pi calculated with %lld iterations: %.5f\n", iterations, calculate_pi(iterations));
-    printf("e calculated with %lld iterations: %.5f\n", iterations, calculate_e(iterations));
+    printf("pi calculated with %lld iterations: %.5llf\n", iterations, calculate_pi(iterations));
+    printf("e calculated with %lld iterations: %.5llf\n", iterations, calculate_e(iterations));
 }
